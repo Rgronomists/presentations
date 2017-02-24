@@ -1,0 +1,26 @@
+---
+title: "Tidyverse"
+author: "Ranae Dietzel"
+ratio: 16x10
+output:
+  rmdshower::shower_presentation:
+    self_contained: false
+    katex: true
+    theme: ribbon
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Tidyverse  
+## Tidy data  
+## Tidyverse goals and philosophies
+## Group of packages  
+## readr
+## tidyr  
+## dplyr  
+## ggplot2  
+
+
+##
