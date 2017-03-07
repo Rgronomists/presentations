@@ -13,6 +13,43 @@
   <script src="slides_tidyverse_files\rmdshower/auto-render.min.js" type="text/javascript"></script>
   
   
+    <style type="text/css">
+   div.sourceCode { overflow-x: auto; }
+   table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+     margin: 0; padding: 0; vertical-align: baseline; border: none; }
+   table.sourceCode { width: 100%; line-height: 100%; }
+   td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+   td.sourceCode { padding-left: 5px; }
+   code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+   code > span.dt { color: #902000; } /* DataType */
+   code > span.dv { color: #40a070; } /* DecVal */
+   code > span.bn { color: #40a070; } /* BaseN */
+   code > span.fl { color: #40a070; } /* Float */
+   code > span.ch { color: #4070a0; } /* Char */
+   code > span.st { color: #4070a0; } /* String */
+   code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+   code > span.ot { color: #007020; } /* Other */
+   code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+   code > span.fu { color: #06287e; } /* Function */
+   code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+   code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+   code > span.cn { color: #880000; } /* Constant */
+   code > span.sc { color: #4070a0; } /* SpecialChar */
+   code > span.vs { color: #4070a0; } /* VerbatimString */
+   code > span.ss { color: #bb6688; } /* SpecialString */
+   code > span.im { } /* Import */
+   code > span.va { color: #19177c; } /* Variable */
+   code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+   code > span.op { color: #666666; } /* Operator */
+   code > span.bu { } /* BuiltIn */
+   code > span.ex { } /* Extension */
+   code > span.pp { color: #bc7a00; } /* Preprocessor */
+   code > span.at { color: #7d9029; } /* Attribute */
+   code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+   code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+   code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+   code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
   
   
   
@@ -48,6 +85,11 @@
 <p>Collection of R packages designed to work around a <a href="https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html">common philosophy</a>.</p>
 <p>Model with arrows</p>
 </section>
+<section id="two-tidyverse-components-covered-today" class="slide level2">
+<h2>Two tidyverse components covered today</h2>
+<p>*Tidy data</p>
+<p>*Piping</p>
+</section>
 <section id="tidy-data" class="slide level2">
 <h2>Tidy data</h2>
 <center>
@@ -68,11 +110,8 @@
 </li>
 <li>Placing variables in columns takes advantage of R’s vectorized nature<br />
 </li>
-<li>ggplot2 and dplyr are best friends with tidy data</li>
+<li><a href="http://vita.had.co.nz/papers/tidy-data.pdf">Tidy data publication</a></li>
 </ul>
-</section>
-<section id="pipe" class="slide level2">
-<h2>Pipe</h2>
 </section>
 <section id="very-easy-to-find-data-that-is-well-organized-but-not-tidy" class="slide level2">
 <h2>Very easy to find data that is well organized, but not tidy</h2>
@@ -119,6 +158,9 @@
 </section>
 <section id="gather-2" class="slide level2">
 <h2><code>gather</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tidy_soil&lt;-<span class="kw">gather</span>(soil, five_cm, ten_cm, fifteen_cm, twenty_cm, 
+                  <span class="dt">key=</span>depth, <span class="dt">value=</span>value)
+tidy_soil</code></pre></div>
 <pre><code>## # A tibble: 20 × 3
 ##    property      depth value
 ##       &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt;
@@ -145,6 +187,9 @@
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(tidy_soil, property ==<span class="st"> &quot;pH&quot;</span>)%&gt;%
+<span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>depth, <span class="dt">y=</span>value))+
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>)</code></pre></div>
 <p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /> Almost!</p>
 </section>
 <section id="see-also-spread" class="slide level2">
@@ -180,6 +225,7 @@ What is the <code>value</code>?</p>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gather</span>(biomass, may, june, july, august, <span class="dt">key =</span> month, <span class="dt">value =</span> g_m2)</code></pre></div>
 <pre><code>## # A tibble: 16 × 5
 ##      trt block  part  month  g_m2
 ##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
@@ -199,6 +245,30 @@ What is the <code>value</code>?</p>
 ## 14   100     A  stem august   7.7
 ## 15   130     A fruit august   8.8
 ## 16   150     A  root august  22.0</code></pre>
+</section>
+<section id="section-2" class="titleslide slide level1"><h2 class="shout">%&gt;%</h2></section><section id="moves-or-pipes-the-result-forward-into-the-next-function" class="slide level2">
+<h2><code>%&gt;%</code> moves or “pipes” the result forward into the next function</h2>
+<p><code>f(x)</code> is the same as <code>x %&gt;% f()</code></p>
+<p>*assumes the first input/argument the function wants is the data set<br />
+<code>ggplot(df, aes(x = this, y = values))</code></p>
+<p>vs</p>
+<p><code>df %&gt;% ggplot(aes(x = this, y = values))</code></p>
+</section><section id="much-easier-to-read" class="slide level2">
+<h2>Much easier to read</h2>
+<p>Regular code chunks work from inside out</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">finally_last_step</span>(
+  <span class="kw">and_then_third</span>(
+    <span class="kw">then_second</span>(
+      <span class="kw">do_first</span>(data)
+    )
+  )
+)</code></pre></div>
+<p>Piping uses intuitive ordering</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data%&gt;%
+<span class="st">  </span><span class="kw">do_first</span>()%&gt;%
+<span class="st">  </span><span class="kw">then_second</span>()%&gt;%
+<span class="st">  </span><span class="kw">and_then_third</span>()%&gt;%
+<span class="st">  </span><span class="kw">finally_last_step</span>()  </code></pre></div>
 </section>
 
   <!--

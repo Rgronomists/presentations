@@ -8,11 +8,6 @@ output:
     katex: true
     theme: ribbon
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
 ## Tidyverse  
 
 Goals
@@ -33,7 +28,12 @@ Pit of success
 ##What is it really  
 Collection of R packages designed to work around a [common philosophy](https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html). 
 
-Model with arrows
+Model with arrows  
+
+## Two tidyverse components covered today  
+*Tidy data  
+
+*Piping  
 
 ## Tidy data  
 
@@ -47,10 +47,8 @@ Model with arrows
 
 * Consistent data structure allows easier learning of related tools because they have an underlying uniformity  
 * Placing variables in columns takes advantage of R's vectorized nature  
-* ggplot2 and dplyr are best friends with tidy data  
 * [Tidy data publication](http://vita.had.co.nz/papers/tidy-data.pdf)
 
-##Pipe
 
 ##  Very easy to find data that is well organized, but not tidy 
 
@@ -148,6 +146,44 @@ gather(biomass, may, june, july, august, key = month, value = g_m2)
 
 ```{r, echo=FALSE}
 biomass_tidy<-gather(biomass, may, june, july, august, key = month, value = g_m2)
-```
+```  
+
+#%>%  
+
+## `%>%` moves or "pipes" the result forward into the next function  
+
+`f(x)` is the same as `x %>% f()`  
+
+
+  *assumes the first input/argument the function wants is the data set  
+`ggplot(df, aes(x = this, y = values))`  
+
+vs  
+
+`df %>% ggplot(aes(x = this, y = values))`  
+
+## Much easier to read  
+Regular code chunks work from inside out  
+```{r, echo=TRUE, eval=FALSE}
+finally_last_step(
+  and_then_third(
+    then_second(
+      do_first(data)
+    )
+  )
+)
+```  
+
+Piping uses intuitive ordering  
+```{r, echo=TRUE, eval=FALSE} 
+data%>%
+  do_first()%>%
+  then_second()%>%
+  and_then_third()%>%
+  finally_last_step()  
+```  
+
+
+
 
 
