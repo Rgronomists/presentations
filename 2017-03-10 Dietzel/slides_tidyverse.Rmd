@@ -9,31 +9,35 @@ output:
     theme: ribbon
 ---
 ## Tidyverse  
+* A place where people and their mental well-being are valued.  
+* Welcoming to non-programmers.  
+* Seeks to be a utopia of data science.  
+* One of many R universes. My favorite.  
 
-Goals
-The tidyverse is a place where people and their mental well-being are valued. The tidyverse is welcoming to non-programmers. The tidyverse seeks to be a utopia of data science. One of many R universes. My favorite.  
+##Philosophy best explained by creator  
 
-##Best explained by creator  
+Hadley Wickham's talk from UseR! 2016 [Tools for tidy data](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics)  
 
-Pit of success
-
-[Tools for tidy data](https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics)
+<font size="22">If someone is making a "pit of success", you should probably walk towards it.</font>
 
 ## Best way to learn the tidyverse 
 
  <center><img src="images/r4ds_cover.jpg" width="300px" /></center>  
  [A book about data science in the tidyverse](http://r4ds.had.co.nz/)
  
-
-##What is it really  
+##What is it? 
 Collection of R packages designed to work around a [common philosophy](https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html). 
 
-Model with arrows  
+<center><img src="images/data-science-model.png" width="700px" /></center> 
+
+##What is it? 
+Collection of R packages designed to work around a [common philosophy](https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html). 
+
+<center><img src="images/data-science-model-packages.png" width="700px" /></center>   
 
 ## Two tidyverse components covered today  
-*Tidy data  
-
-*Piping  
+<center><img src="images/tidyr.png" width="200px" /></center>   
+<center><img src="images/pipe.png" width="200px" /></center>  
 
 ## Tidy data  
 
@@ -47,7 +51,7 @@ Model with arrows
 
 * Consistent data structure allows easier learning of related tools because they have an underlying uniformity  
 * Placing variables in columns takes advantage of R's vectorized nature  
-* [Tidy data publication](http://vita.had.co.nz/papers/tidy-data.pdf)
+* [Hadley's tidy data publication](http://vita.had.co.nz/papers/tidy-data.pdf)
 
 
 ##  Very easy to find data that is well organized, but not tidy 
@@ -98,10 +102,11 @@ tidy_soil
 ##  
 ```{r}
 filter(tidy_soil, property == "pH")%>%
-ggplot(aes(x=depth, y=value))+
-  geom_point(size=3)
+ggplot(aes(x=factor(depth, levels = c("five_cm", "ten_cm", "fifteen_cm", "twenty_cm")), y=value))+
+  geom_point(size=3)+
+  labs(x="depth", y="pH")
 ```
-Almost!  
+  
 
 ##  See also  `spread`
 
@@ -118,35 +123,6 @@ head(oats)
 * Now column that includes the variable names is `key`, here it is `Data Item`.  
 * Column that contains the values is the `value` column, here they already have it as `Values` 
 
-
-##  Our turn 
-```{r, echo=FALSE}
-biomass<-data.frame(trt = c("0", "100", "130", "150"),
-               block = c("A", "A", "A", "A"),
-                    part=c("leaf", "stem", "fruit", "root"),
-                    may = c(5.5, 5.7, 0, 12.0),
-                    june = c(7.5, 6.7, 2.0, 14.0),
-                    july = c(12.5, 7.7, 8.2, 22.5),
-                    august = c(12.5, 7.7, 8.8, 22.0),
-                   stringsAsFactors=FALSE)
-
-biomass<-as_tibble(biomass)
-biomass
-
-```  
-
-Which columns need to be incorporated?  
-What is the `key`?  
-What is the `value`?  
-
-##  
-```{r}
-gather(biomass, may, june, july, august, key = month, value = g_m2)
-```
-
-```{r, echo=FALSE}
-biomass_tidy<-gather(biomass, may, june, july, august, key = month, value = g_m2)
-```  
 
 #%>%  
 
@@ -182,6 +158,81 @@ data%>%
   and_then_third()%>%
   finally_last_step()  
 ```  
+
+##Corn "eras"
+We read this dataframe in above as "crops"
+```{r, echo=TRUE, eval=FALSE}
+crops%>%
+  select(Year, State, Commodity, `Data Item`, Value)%>%   
+  rename(Data = `Data Item`, bu_acre = Value)%>%         
+  filter(Year > 1866, 
+         Data == "CORN, GRAIN - YIELD, MEASURED IN BU / ACRE")%>% 
+  mutate(era = ifelse ((Year %in% c(1867:1940)), "prehybrid",     
+                        ifelse((Year %in% c(1941:1990)), "old",    
+                                ifelse ((Year %in% c(1991:2015)), 
+                                        "new", "nope"))))%>%
+  ggplot(aes(x=Year, y=bu_acre, group=era, color=era))+                    
+  geom_point()+
+  geom_smooth(method=lm)
+```  
+
+##  
+```{r, echo=FALSE}
+crops%>%
+  select(Year, State, Commodity, `Data Item`, Value)%>%   
+  rename(Data = `Data Item`, bu_acre = Value)%>%         
+  filter(Year > 1866, 
+         Data == "CORN, GRAIN - YIELD, MEASURED IN BU / ACRE")%>% 
+  mutate(era = ifelse ((Year %in% c(1867:1940)), "prehybrid",     
+                        ifelse((Year %in% c(1941:1990)), "old",    
+                                ifelse ((Year %in% c(1991:2015)), 
+                                        "new", "nope"))))%>%
+  ggplot(aes(x=Year, y=bu_acre, group=era, color=era))+                    
+  geom_point()+
+  geom_smooth(method=lm)
+```  
+
+##Shift from small grains  
+```{r, echo=TRUE, eval=FALSE}
+crops%>%
+  select(Year, State, Commodity, `Data Item`, Value)%>%
+  filter(Commodity %in% c("OATS", "BARLEY", "WHEAT", "RYE", "SOYBEANS") & 
+           `Data Item` %in% c("OATS - ACRES HARVESTED",
+                              "BARLEY - ACRES HARVESTED",
+                              "WHEAT - ACRES HARVESTED",
+                              "RYE - ACRES HARVESTED",
+                              "SOYBEANS - ACRES HARVESTED"))%>%
+  mutate(size = ifelse ((Commodity %in% c("OATS", "BARLEY", "WHEAT", "RYE")),
+                        "small","soybean"))%>%
+  group_by(size, Year)%>%
+  summarise(total=sum(Value))%>%
+  ggplot(aes(x=Year, y=total, group=size, color=size))+
+  geom_point()+
+  geom_smooth()+
+  ggtitle("Changes in small grain and soybean acres in Iowa")+
+  labs(y="Total acres harvested")
+```
+
+##  
+```{r, echo=FALSE, message=FALSE}
+crops%>%
+  select(Year, State, Commodity, `Data Item`, Value)%>%
+  filter(Commodity %in% c("OATS", "BARLEY", "WHEAT", "RYE", "SOYBEANS") & 
+           `Data Item` %in% c("OATS - ACRES HARVESTED",
+                              "BARLEY - ACRES HARVESTED",
+                              "WHEAT - ACRES HARVESTED",
+                              "RYE - ACRES HARVESTED",
+                              "SOYBEANS - ACRES HARVESTED"))%>%
+  mutate(size = ifelse ((Commodity %in% c("OATS", "BARLEY", "WHEAT", "RYE")),
+                        "small","soybean"))%>%
+  group_by(size, Year)%>%
+  summarise(total=sum(Value))%>%
+  ggplot(aes(x=Year, y=total, group=size, color=size))+
+  geom_point()+
+  geom_smooth()+
+  ggtitle("Changes in small grain and soybean acres in Iowa")+
+  labs(y="Total acres harvested")
+```
 
 
 

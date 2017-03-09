@@ -66,12 +66,20 @@
   
 <section id="tidyverse" class="slide level2">
 <h2>Tidyverse</h2>
-<p>Goals The tidyverse is a place where people and their mental well-being are valued. The tidyverse is welcoming to non-programmers. The tidyverse seeks to be a utopia of data science. One of many R universes. My favorite.</p>
+<ul>
+<li>A place where people and their mental well-being are valued.<br />
+</li>
+<li>Welcoming to non-programmers.<br />
+</li>
+<li>Seeks to be a utopia of data science.<br />
+</li>
+<li>One of many R universes. My favorite.</li>
+</ul>
 </section>
-<section id="best-explained-by-creator" class="slide level2">
-<h2>Best explained by creator</h2>
-<p>Pit of success</p>
-<p><a href="https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics">Tools for tidy data</a></p>
+<section id="philosophy-best-explained-by-creator" class="slide level2">
+<h2>Philosophy best explained by creator</h2>
+<p>Hadley Wickham’s talk from UseR! 2016 <a href="https://channel9.msdn.com/Events/useR-international-R-User-conference/useR2016/Towards-a-grammar-of-interactive-graphics">Tools for tidy data</a></p>
+<p><font size="22">If someone is making a “pit of success”, you should probably walk towards it.</font></p>
 </section>
 <section id="best-way-to-learn-the-tidyverse" class="slide level2">
 <h2>Best way to learn the tidyverse</h2>
@@ -80,15 +88,28 @@
 </center>
 <p><a href="http://r4ds.had.co.nz/">A book about data science in the tidyverse</a></p>
 </section>
-<section id="what-is-it-really" class="slide level2">
-<h2>What is it really</h2>
+<section id="what-is-it" class="slide level2">
+<h2>What is it?</h2>
 <p>Collection of R packages designed to work around a <a href="https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html">common philosophy</a>.</p>
-<p>Model with arrows</p>
+<center>
+<img src="images/data-science-model.png" width="700px" />
+</center>
+</section>
+<section id="what-is-it-1" class="slide level2">
+<h2>What is it?</h2>
+<p>Collection of R packages designed to work around a <a href="https://cran.r-project.org/web/packages/tidyverse/vignettes/manifesto.html">common philosophy</a>.</p>
+<center>
+<img src="images/data-science-model-packages.png" width="700px" />
+</center>
 </section>
 <section id="two-tidyverse-components-covered-today" class="slide level2">
 <h2>Two tidyverse components covered today</h2>
-<p>*Tidy data</p>
-<p>*Piping</p>
+<center>
+<img src="images/tidyr.png" width="200px" />
+</center>
+<center>
+<img src="images/pipe.png" width="200px" />
+</center>
 </section>
 <section id="tidy-data" class="slide level2">
 <h2>Tidy data</h2>
@@ -110,7 +131,7 @@
 </li>
 <li>Placing variables in columns takes advantage of R’s vectorized nature<br />
 </li>
-<li><a href="http://vita.had.co.nz/papers/tidy-data.pdf">Tidy data publication</a></li>
+<li><a href="http://vita.had.co.nz/papers/tidy-data.pdf">Hadley’s tidy data publication</a></li>
 </ul>
 </section>
 <section id="very-easy-to-find-data-that-is-well-organized-but-not-tidy" class="slide level2">
@@ -188,9 +209,10 @@ tidy_soil</code></pre></div>
 <section id="section" class="slide level2">
 <h2></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(tidy_soil, property ==<span class="st"> &quot;pH&quot;</span>)%&gt;%
-<span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>depth, <span class="dt">y=</span>value))+
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>)</code></pre></div>
-<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /> Almost!</p>
+<span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">factor</span>(depth, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;five_cm&quot;</span>, <span class="st">&quot;ten_cm&quot;</span>, <span class="st">&quot;fifteen_cm&quot;</span>, <span class="st">&quot;twenty_cm&quot;</span>)), <span class="dt">y=</span>value))+
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>)+
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;depth&quot;</span>, <span class="dt">y=</span><span class="st">&quot;pH&quot;</span>)</code></pre></div>
+<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-6-1.png" width="768" /></p>
 </section>
 <section id="see-also-spread" class="slide level2">
 <h2>See also <code>spread</code></h2>
@@ -210,43 +232,7 @@ tidy_soil</code></pre></div>
 <li>Column that contains the values is the <code>value</code> column, here they already have it as <code>Values</code></li>
 </ul>
 </section>
-<section id="our-turn" class="slide level2">
-<h2>Our turn</h2>
-<pre><code>## # A tibble: 4 × 7
-##     trt block  part   may  june  july august
-##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1     0     A  leaf   5.5   7.5  12.5   12.5
-## 2   100     A  stem   5.7   6.7   7.7    7.7
-## 3   130     A fruit   0.0   2.0   8.2    8.8
-## 4   150     A  root  12.0  14.0  22.5   22.0</code></pre>
-<p>Which columns need to be incorporated?<br />
-What is the <code>key</code>?<br />
-What is the <code>value</code>?</p>
-</section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gather</span>(biomass, may, june, july, august, <span class="dt">key =</span> month, <span class="dt">value =</span> g_m2)</code></pre></div>
-<pre><code>## # A tibble: 16 × 5
-##      trt block  part  month  g_m2
-##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
-## 1      0     A  leaf    may   5.5
-## 2    100     A  stem    may   5.7
-## 3    130     A fruit    may   0.0
-## 4    150     A  root    may  12.0
-## 5      0     A  leaf   june   7.5
-## 6    100     A  stem   june   6.7
-## 7    130     A fruit   june   2.0
-## 8    150     A  root   june  14.0
-## 9      0     A  leaf   july  12.5
-## 10   100     A  stem   july   7.7
-## 11   130     A fruit   july   8.2
-## 12   150     A  root   july  22.5
-## 13     0     A  leaf august  12.5
-## 14   100     A  stem august   7.7
-## 15   130     A fruit august   8.8
-## 16   150     A  root august  22.0</code></pre>
-</section>
-<section id="section-2" class="titleslide slide level1"><h2 class="shout">%&gt;%</h2></section><section id="moves-or-pipes-the-result-forward-into-the-next-function" class="slide level2">
+<section id="section-1" class="titleslide slide level1"><h2 class="shout">%&gt;%</h2></section><section id="moves-or-pipes-the-result-forward-into-the-next-function" class="slide level2">
 <h2><code>%&gt;%</code> moves or “pipes” the result forward into the next function</h2>
 <p><code>f(x)</code> is the same as <code>x %&gt;% f()</code></p>
 <p>*assumes the first input/argument the function wants is the data set<br />
@@ -269,6 +255,46 @@ What is the <code>value</code>?</p>
 <span class="st">  </span><span class="kw">then_second</span>()%&gt;%
 <span class="st">  </span><span class="kw">and_then_third</span>()%&gt;%
 <span class="st">  </span><span class="kw">finally_last_step</span>()  </code></pre></div>
+</section><section id="corn-eras" class="slide level2">
+<h2>Corn “eras”</h2>
+<p>We read this dataframe in above as “crops”</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">crops%&gt;%
+<span class="st">  </span><span class="kw">select</span>(Year, State, Commodity, <span class="st">`</span><span class="dt">Data Item</span><span class="st">`</span>, Value)%&gt;%<span class="st">   </span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">Data =</span> <span class="st">`</span><span class="dt">Data Item</span><span class="st">`</span>, <span class="dt">bu_acre =</span> Value)%&gt;%<span class="st">         </span>
+<span class="st">  </span><span class="kw">filter</span>(Year &gt;<span class="st"> </span><span class="dv">1866</span>, 
+         Data ==<span class="st"> &quot;CORN, GRAIN - YIELD, MEASURED IN BU / ACRE&quot;</span>)%&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">era =</span> <span class="kw">ifelse</span> ((Year %in%<span class="st"> </span><span class="kw">c</span>(<span class="dv">1867</span>:<span class="dv">1940</span>)), <span class="st">&quot;prehybrid&quot;</span>,     
+                        <span class="kw">ifelse</span>((Year %in%<span class="st"> </span><span class="kw">c</span>(<span class="dv">1941</span>:<span class="dv">1990</span>)), <span class="st">&quot;old&quot;</span>,    
+                                <span class="kw">ifelse</span> ((Year %in%<span class="st"> </span><span class="kw">c</span>(<span class="dv">1991</span>:<span class="dv">2015</span>)), 
+                                        <span class="st">&quot;new&quot;</span>, <span class="st">&quot;nope&quot;</span>))))%&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Year, <span class="dt">y=</span>bu_acre, <span class="dt">group=</span>era, <span class="dt">color=</span>era))+<span class="st">                    </span>
+<span class="st">  </span><span class="kw">geom_point</span>()+
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" /></p>
+</section><section id="shift-from-small-grains" class="slide level2">
+<h2>Shift from small grains</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">crops%&gt;%
+<span class="st">  </span><span class="kw">select</span>(Year, State, Commodity, <span class="st">`</span><span class="dt">Data Item</span><span class="st">`</span>, Value)%&gt;%
+<span class="st">  </span><span class="kw">filter</span>(Commodity %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;OATS&quot;</span>, <span class="st">&quot;BARLEY&quot;</span>, <span class="st">&quot;WHEAT&quot;</span>, <span class="st">&quot;RYE&quot;</span>, <span class="st">&quot;SOYBEANS&quot;</span>) &amp;<span class="st"> </span>
+<span class="st">           `</span><span class="dt">Data Item</span><span class="st">`</span> %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;OATS - ACRES HARVESTED&quot;</span>,
+                              <span class="st">&quot;BARLEY - ACRES HARVESTED&quot;</span>,
+                              <span class="st">&quot;WHEAT - ACRES HARVESTED&quot;</span>,
+                              <span class="st">&quot;RYE - ACRES HARVESTED&quot;</span>,
+                              <span class="st">&quot;SOYBEANS - ACRES HARVESTED&quot;</span>))%&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">size =</span> <span class="kw">ifelse</span> ((Commodity %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;OATS&quot;</span>, <span class="st">&quot;BARLEY&quot;</span>, <span class="st">&quot;WHEAT&quot;</span>, <span class="st">&quot;RYE&quot;</span>)),
+                        <span class="st">&quot;small&quot;</span>,<span class="st">&quot;soybean&quot;</span>))%&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(size, Year)%&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">total=</span><span class="kw">sum</span>(Value))%&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Year, <span class="dt">y=</span>total, <span class="dt">group=</span>size, <span class="dt">color=</span>size))+
+<span class="st">  </span><span class="kw">geom_point</span>()+
+<span class="st">  </span><span class="kw">geom_smooth</span>()+
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Changes in small grain and soybean acres in Iowa&quot;</span>)+
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Total acres harvested&quot;</span>)</code></pre></div>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-14-1.png" width="768" /></p>
 </section>
 
   <!--
