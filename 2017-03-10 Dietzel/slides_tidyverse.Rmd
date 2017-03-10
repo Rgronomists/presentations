@@ -80,7 +80,8 @@ When column names are *values* instead of variables, we need to `gather`
 soil
 ```
 
-* We need to know the columns that are the values that need to be incorporated  
+* We need to know:  
+* The columns that are the values that need to be incorporated  
 * The name of the variable for the values, here it is `depth`. This is the `key`.  
 
 
@@ -121,7 +122,7 @@ head(oats)
 ```
 
 * Now column that includes the variable names is `key`, here it is `Data Item`.  
-* Column that contains the values is the `value` column, here they already have it as `Values` 
+* Column that contains the values is the `value` column, here they already have it as `Value` 
 
 
 #%>%  
@@ -158,6 +159,48 @@ data%>%
   and_then_third()%>%
   finally_last_step()  
 ```  
+
+##  Example 
+```{r, echo=FALSE}
+biomass<-data.frame(trt = c("0", "100", "130", "150"),
+               block = c("A", "A", "A", "A"),
+                    part=c("leaf", "stem", "fruit", "root"),
+                    may = c(5.5, 5.7, 0, 12.0),
+                    june = c(7.5, 6.7, 2.0, 14.0),
+                    july = c(12.5, 7.7, 8.2, 22.5),
+                    august = c(12.5, 7.7, 8.8, 22.0),
+                   stringsAsFactors=FALSE)
+
+biomass<-as_tibble(biomass)
+biomass
+
+```  
+Which columns need to be incorporated?  
+What is the `key`?  
+What is the `value`?  
+
+##  
+```{r}
+gather(biomass, may, june, july, august, key = month, value = g_m2)
+```  
+
+##  
+```{r}
+gather(biomass, may, june, july, august, key = month, value = g_m2)%>%
+  group_by(part, month)%>%
+  summarise(avg = mean(g_m2))
+```
+
+
+##More Examples  
+The next two examples have non-tidyverse equivalents [here](http://agron590-isu.github.io/lab/week_07/dataframes/script_dataframes.R).  
+
+These examples come from a nice ag dataset available from the [National Agricultural Statitistics Service](https://quickstats.nass.usda.gov/). I've selected data that focuses on field crops in Iowa.  
+
+```{r, echo=FALSE}
+head(crops)
+```
+
 
 ##Corn "eras"
 We read this dataframe in above as "crops"
@@ -234,7 +277,8 @@ crops%>%
   labs(y="Total acres harvested")
 ```
 
-
+##Any more ideas of what we want to look at with time remaining?  
+ <center><img src="images/coding.gif" width="600px" /></center> 
 
 
 

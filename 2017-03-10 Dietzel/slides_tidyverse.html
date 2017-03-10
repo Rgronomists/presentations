@@ -158,7 +158,9 @@
 ## 4     silt      20   20.0       20.0      20.0
 ## 5     sand      60   60.0       60.0      60.0</code></pre>
 <ul>
-<li>We need to know the columns that are the values that need to be incorporated<br />
+<li>We need to know:<br />
+</li>
+<li>The columns that are the values that need to be incorporated<br />
 </li>
 <li>The name of the variable for the values, here it is <code>depth</code>. This is the <code>key</code>.</li>
 </ul>
@@ -229,7 +231,7 @@ tidy_soil</code></pre></div>
 <ul>
 <li>Now column that includes the variable names is <code>key</code>, here it is <code>Data Item</code>.<br />
 </li>
-<li>Column that contains the values is the <code>value</code> column, here they already have it as <code>Values</code></li>
+<li>Column that contains the values is the <code>value</code> column, here they already have it as <code>Value</code></li>
 </ul>
 </section>
 <section id="section-1" class="titleslide slide level1"><h2 class="shout">%&gt;%</h2></section><section id="moves-or-pipes-the-result-forward-into-the-next-function" class="slide level2">
@@ -255,6 +257,84 @@ tidy_soil</code></pre></div>
 <span class="st">  </span><span class="kw">then_second</span>()%&gt;%
 <span class="st">  </span><span class="kw">and_then_third</span>()%&gt;%
 <span class="st">  </span><span class="kw">finally_last_step</span>()  </code></pre></div>
+</section><section id="example" class="slide level2">
+<h2>Example</h2>
+<pre><code>## # A tibble: 4 × 7
+##     trt block  part   may  june  july august
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0     A  leaf   5.5   7.5  12.5   12.5
+## 2   100     A  stem   5.7   6.7   7.7    7.7
+## 3   130     A fruit   0.0   2.0   8.2    8.8
+## 4   150     A  root  12.0  14.0  22.5   22.0</code></pre>
+<p>Which columns need to be incorporated?<br />
+What is the <code>key</code>?<br />
+What is the <code>value</code>?</p>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gather</span>(biomass, may, june, july, august, <span class="dt">key =</span> month, <span class="dt">value =</span> g_m2)</code></pre></div>
+<pre><code>## # A tibble: 16 × 5
+##      trt block  part  month  g_m2
+##    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
+## 1      0     A  leaf    may   5.5
+## 2    100     A  stem    may   5.7
+## 3    130     A fruit    may   0.0
+## 4    150     A  root    may  12.0
+## 5      0     A  leaf   june   7.5
+## 6    100     A  stem   june   6.7
+## 7    130     A fruit   june   2.0
+## 8    150     A  root   june  14.0
+## 9      0     A  leaf   july  12.5
+## 10   100     A  stem   july   7.7
+## 11   130     A fruit   july   8.2
+## 12   150     A  root   july  22.5
+## 13     0     A  leaf august  12.5
+## 14   100     A  stem august   7.7
+## 15   130     A fruit august   8.8
+## 16   150     A  root august  22.0</code></pre>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gather</span>(biomass, may, june, july, august, <span class="dt">key =</span> month, <span class="dt">value =</span> g_m2)%&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(part, month)%&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg =</span> <span class="kw">mean</span>(g_m2))</code></pre></div>
+<pre><code>## Source: local data frame [16 x 3]
+## Groups: part [?]
+## 
+##     part  month   avg
+##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
+## 1  fruit august   8.8
+## 2  fruit   july   8.2
+## 3  fruit   june   2.0
+## 4  fruit    may   0.0
+## 5   leaf august  12.5
+## 6   leaf   july  12.5
+## 7   leaf   june   7.5
+## 8   leaf    may   5.5
+## 9   root august  22.0
+## 10  root   july  22.5
+## 11  root   june  14.0
+## 12  root    may  12.0
+## 13  stem august   7.7
+## 14  stem   july   7.7
+## 15  stem   june   6.7
+## 16  stem    may   5.7</code></pre>
+</section><section id="more-examples" class="slide level2">
+<h2>More Examples</h2>
+<p>The next two examples have non-tidyverse equivalents <a href="http://agron590-isu.github.io/lab/week_07/dataframes/script_dataframes.R">here</a>.</p>
+<p>These examples come from a nice ag dataset available from the <a href="https://quickstats.nass.usda.gov/">National Agricultural Statitistics Service</a>. I’ve selected data that focuses on field crops in Iowa.</p>
+<pre><code>## # A tibble: 6 × 21
+##   Program  Year Period `Week Ending` `Geo Level` State `State ANSI`
+##     &lt;chr&gt; &lt;int&gt;  &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;        &lt;int&gt;
+## 1  SURVEY  2015   YEAR          &lt;NA&gt;       STATE  IOWA           19
+## 2  SURVEY  2015   YEAR          &lt;NA&gt;       STATE  IOWA           19
+## 3  SURVEY  2015   YEAR          &lt;NA&gt;       STATE  IOWA           19
+## 4  SURVEY  2015   YEAR          &lt;NA&gt;       STATE  IOWA           19
+## 5  SURVEY  2015   YEAR          &lt;NA&gt;       STATE  IOWA           19
+## 6  SURVEY  2015   YEAR          &lt;NA&gt;       STATE  IOWA           19
+## # ... with 14 more variables: `Ag District` &lt;chr&gt;, `Ag District
+## #   Code` &lt;chr&gt;, County &lt;chr&gt;, `County ANSI` &lt;chr&gt;, `Zip Code` &lt;chr&gt;,
+## #   Region &lt;chr&gt;, watershed_code &lt;chr&gt;, Watershed &lt;chr&gt;, Commodity &lt;chr&gt;,
+## #   `Data Item` &lt;chr&gt;, Domain &lt;chr&gt;, `Domain Category` &lt;chr&gt;, Value &lt;dbl&gt;,
+## #   `CV (%)` &lt;chr&gt;</code></pre>
 </section><section id="corn-eras" class="slide level2">
 <h2>Corn “eras”</h2>
 <p>We read this dataframe in above as “crops”</p>
@@ -270,9 +350,9 @@ tidy_soil</code></pre></div>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Year, <span class="dt">y=</span>bu_acre, <span class="dt">group=</span>era, <span class="dt">color=</span>era))+<span class="st">                    </span>
 <span class="st">  </span><span class="kw">geom_point</span>()+
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
-</section><section id="section-2" class="slide level2">
+</section><section id="section-4" class="slide level2">
 <h2></h2>
-<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" /></p>
+<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-16-1.png" width="768" /></p>
 </section><section id="shift-from-small-grains" class="slide level2">
 <h2>Shift from small grains</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">crops%&gt;%
@@ -292,9 +372,14 @@ tidy_soil</code></pre></div>
 <span class="st">  </span><span class="kw">geom_smooth</span>()+
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Changes in small grain and soybean acres in Iowa&quot;</span>)+
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Total acres harvested&quot;</span>)</code></pre></div>
-</section><section id="section-3" class="slide level2">
+</section><section id="section-5" class="slide level2">
 <h2></h2>
-<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-14-1.png" width="768" /></p>
+<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" /></p>
+</section><section id="any-more-ideas-of-what-we-want-to-look-at-with-time-remaining" class="slide level2">
+<h2>Any more ideas of what we want to look at with time remaining?</h2>
+<center>
+<img src="images/coding.gif" width="600px" />
+</center>
 </section>
 
   <!--
