@@ -36,6 +36,9 @@ crops<-read_csv("data/NASS-Iowa.csv")
 oats<-(crops[crops$Commodity == "OATS", c(2, 16, 17, 20)])  
 head(oats)
 
+## ------------------------------------------------------------------------
+spread(oats, key = `Data Item`, value = Value)
+
 ## ---- echo=TRUE, eval=FALSE----------------------------------------------
 ## finally_last_step(
 ##   and_then_third(

@@ -122,7 +122,13 @@ head(oats)
 ```
 
 * Now column that includes the variable names is `key`, here it is `Data Item`.  
-* Column that contains the values is the `value` column, here they already have it as `Value` 
+* Column that contains the values is the `value` column, here they already have it as `Value`
+
+##   
+```{r}
+spread(oats, key = `Data Item`, value = Value)
+```
+
 
 
 #%>%  

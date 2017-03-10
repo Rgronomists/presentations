@@ -234,7 +234,28 @@ tidy_soil</code></pre></div>
 <li>Column that contains the values is the <code>value</code> column, here they already have it as <code>Value</code></li>
 </ul>
 </section>
-<section id="section-1" class="titleslide slide level1"><h2 class="shout">%&gt;%</h2></section><section id="moves-or-pipes-the-result-forward-into-the-next-function" class="slide level2">
+<section id="section-1" class="slide level2">
+<h2></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">spread</span>(oats, <span class="dt">key =</span> <span class="st">`</span><span class="dt">Data Item</span><span class="st">`</span>, <span class="dt">value =</span> Value)</code></pre></div>
+<pre><code>## # A tibble: 150 × 8
+##     Year Commodity `OATS - ACRES HARVESTED` `OATS - ACRES PLANTED`
+## *  &lt;int&gt;     &lt;chr&gt;                    &lt;dbl&gt;                  &lt;dbl&gt;
+## 1   1866      OATS                   450000                     NA
+## 2   1867      OATS                   500000                     NA
+## 3   1868      OATS                   560000                     NA
+## 4   1869      OATS                   610000                     NA
+## 5   1870      OATS                   660000                     NA
+## 6   1871      OATS                   750000                     NA
+## 7   1872      OATS                   850000                     NA
+## 8   1873      OATS                   910000                     NA
+## 9   1874      OATS                   960000                     NA
+## 10  1875      OATS                  1075000                     NA
+## # ... with 140 more rows, and 4 more variables: `OATS - PRODUCTION,
+## #   MEASURED IN $` &lt;dbl&gt;, `OATS - PRODUCTION, MEASURED IN BU` &lt;dbl&gt;, `OATS
+## #   - YIELD, MEASURED IN BU / ACRE` &lt;dbl&gt;, `OATS - YIELD, MEASURED IN BU /
+## #   NET PLANTED ACRE` &lt;dbl&gt;</code></pre>
+</section>
+<section id="section-2" class="titleslide slide level1"><h2 class="shout">%&gt;%</h2></section><section id="moves-or-pipes-the-result-forward-into-the-next-function" class="slide level2">
 <h2><code>%&gt;%</code> moves or “pipes” the result forward into the next function</h2>
 <p><code>f(x)</code> is the same as <code>x %&gt;% f()</code></p>
 <p>*assumes the first input/argument the function wants is the data set<br />
@@ -269,7 +290,7 @@ tidy_soil</code></pre></div>
 <p>Which columns need to be incorporated?<br />
 What is the <code>key</code>?<br />
 What is the <code>value</code>?</p>
-</section><section id="section-2" class="slide level2">
+</section><section id="section-3" class="slide level2">
 <h2></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gather</span>(biomass, may, june, july, august, <span class="dt">key =</span> month, <span class="dt">value =</span> g_m2)</code></pre></div>
 <pre><code>## # A tibble: 16 × 5
@@ -291,7 +312,7 @@ What is the <code>value</code>?</p>
 ## 14   100     A  stem august   7.7
 ## 15   130     A fruit august   8.8
 ## 16   150     A  root august  22.0</code></pre>
-</section><section id="section-3" class="slide level2">
+</section><section id="section-4" class="slide level2">
 <h2></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gather</span>(biomass, may, june, july, august, <span class="dt">key =</span> month, <span class="dt">value =</span> g_m2)%&gt;%
 <span class="st">  </span><span class="kw">group_by</span>(part, month)%&gt;%
@@ -350,9 +371,9 @@ What is the <code>value</code>?</p>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Year, <span class="dt">y=</span>bu_acre, <span class="dt">group=</span>era, <span class="dt">color=</span>era))+<span class="st">                    </span>
 <span class="st">  </span><span class="kw">geom_point</span>()+
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
-</section><section id="section-4" class="slide level2">
+</section><section id="section-5" class="slide level2">
 <h2></h2>
-<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-16-1.png" width="768" /></p>
+<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-17-1.png" width="768" /></p>
 </section><section id="shift-from-small-grains" class="slide level2">
 <h2>Shift from small grains</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">crops%&gt;%
@@ -372,9 +393,9 @@ What is the <code>value</code>?</p>
 <span class="st">  </span><span class="kw">geom_smooth</span>()+
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Changes in small grain and soybean acres in Iowa&quot;</span>)+
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">y=</span><span class="st">&quot;Total acres harvested&quot;</span>)</code></pre></div>
-</section><section id="section-5" class="slide level2">
+</section><section id="section-6" class="slide level2">
 <h2></h2>
-<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-18-1.png" width="768" /></p>
+<p><img src="slides_tidyverse_files/figure-revealjs/unnamed-chunk-19-1.png" width="768" /></p>
 </section><section id="any-more-ideas-of-what-we-want-to-look-at-with-time-remaining" class="slide level2">
 <h2>Any more ideas of what we want to look at with time remaining?</h2>
 <center>
