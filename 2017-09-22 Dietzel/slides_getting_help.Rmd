@@ -1,0 +1,101 @@
+---
+title: "Getting help with R"
+author: "Ranae Dietzel"
+ratio: 16x10
+output:
+  rmdshower::shower_presentation:
+    self_contained: false
+    katex: true
+    theme: ribbon
+---  
+#Learning R
+
+##Resources  
+* Books    
+* Tutorials    
+* Interactive tutorials    
+* R packages  
+* ISU courses and workshops  
+
+##R for Data Science 
+ 
+ <center><img src="images/r4ds_cover.jpg" width="300px" /></center>  
+ [A book for those just getting started with coding](http://r4ds.had.co.nz/)  
+ 
+##Advanced R
+
+ <center><img src="images/advancedR_cover.jpg" width="300px" /></center>  
+ [A book for those who want to improve programming skills and understanding of the R language](http://adv-r.had.co.nz/)  
+ 
+##An Introduction to Statistical and Data Sciences via R  
+
+I have not read this, it looks good.  
+ <center><img src="images/blank_cover.jpg" width="300px" /></center>
+
+[A friendly book for those getting started](getthttps://ismayc.github.io/moderndiver-book/)
+ 
+##Tutorials
+ [Lynda.com](www.lynda.com) is a library of tutorials on almost anything. We have access through ISU.  
+ 
+ One recommended tutorial:
+ 
+ [Up and running with R](https://www.lynda.com/R-tutorials/Up-Running-R/120612-2.html?srchtrk=index%3a12%0alinktypeid%3a2%0aq%3aR+essential+training%0apage%3a1%0as%3arelevance%0asa%3atrue%0aproducttypeid%3a2)
+
+##Tutorials
+
+There are also interactive tutorials as well. Most are free for beginners, but may require payment for advanced sessions (~$25/month)  
+
+So far, I really like [DataCamp](https://campus.datacamp.com/courses/free-introduction-to-r/chapter-3-matrices-3?ex=3)  
+
+Your advisor has $300 laying around.  
+
+##swirl  
+
+[Learn R, in R](http://swirlstats.com/)  
+
+```{r swirl, eval=FALSE}
+install.packages("swirl")  
+```   
+
+```{r, hi swirl, warning=FALSE}
+library(swirl)
+```  
+
+##Courses and workshops on campus  
+* STAT 579: Introduction to R (especially if Heike Hoffman is teaching)  
+* [STAT 585: Data Technologies for Statistical Analysis](https://stat585-at-isu.github.io/index)  
+* [AGRON 590: Data Stewardship](http://agron590-isu.github.io/)
+* [Week of R](http://heike.github.io/rwrks/)
+
+
+#Getting help with R  
+
+##Resources  
+* [Stackoverflow](www.stackoverflow.com)  
+* [RStudio Community](https://community.rstudio.com/)  
+* [#rstats on twitter](https://twitter.com/hashtag/rstats?src=hash)  
+* [Organized learning communities](https://medium.com/@kierisi/join-the-r-for-data-science-online-learning-community-842527222ab3)  
+* Your office/labmate, who didn't learn R in a vaccuum  
+* Fellow Rgronomists  
+
+##  
+You won't get good help if you don't put effort into the asking.  
+
+ <center><img src="images/helpmehelpyou.gif" width="500px" /></center>  
+ 
+##Asking good questions  
+If you are getting help online, you absolutely must create a reproducible example.  
+
+  * You will not get an answer until you do this.  
+  * This is not trivial.  
+  * Good exercise in thinking about your problem.  
+  * Half the time helpers won't know if their code actually works unless they can run it.  
+
+
+
+
+
+
+
+
+
