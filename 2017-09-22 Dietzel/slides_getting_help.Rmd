@@ -75,7 +75,7 @@ library(swirl)
 * [RStudio Community](https://community.rstudio.com/)  
 * [#rstats on twitter](https://twitter.com/hashtag/rstats?src=hash)  
 * [Organized learning communities](https://medium.com/@kierisi/join-the-r-for-data-science-online-learning-community-842527222ab3)  
-* The *help* tab in Rstudio is acutally helpful - cheatsheets
+* The *help* tab in Rstudio is actually helpful - cheatsheets
 * Your office/labmate, who didn't learn R in a vaccuum  
 * Fellow Rgronomists  
 * Anyone want to check out this online user group and let us know? [R users](http://rusers.co/)
@@ -93,7 +93,7 @@ If you are getting help online, you absolutely must create a reproducible exampl
   * Good exercise in thinking about your problem.  
   * Half the time helpers won't know if their code actually works unless they can run it.  
   
-**Rep**roducible **ex**ample is also called a **reprex**  
+**Repr**oducible **ex**ample is also called a **reprex**  
 
 #Steps to asking a good question  
 
@@ -104,6 +104,7 @@ If you are getting help online, you absolutely must create a reproducible exampl
 * Check if some one else has asked the same question.  
     + Google  
     + StackOverflow is usually well covered by google, but sometimes searching specifically in the site works better.  
+    
 People are more willing to give you their time if they can see that you put time in yourself.  
 
 ##Step 2. Provide example data.  
@@ -145,7 +146,9 @@ Data <- data.frame(
 * [reprex package blog](http://www.njtierney.com/post/2017/01/11/magic-reprex/)    
 * [reprex package details](http://reprex.tidyverse.org/)    
 
-##Keeping up with R  
+#Keeping up with R  
+
+##   
 * All you need to do is follow [Mara Averick](https://twitter.com/dataandme) on Twitter  
 * You may notice some other people to follow while you are on there
     
