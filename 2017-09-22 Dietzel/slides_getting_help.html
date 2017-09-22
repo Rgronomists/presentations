@@ -136,16 +136,119 @@ I have not read this, it looks good.<br />
 </li>
 <li><a href="https://medium.com/@kierisi/join-the-r-for-data-science-online-learning-community-842527222ab3">Organized learning communities</a><br />
 </li>
+<li>The <em>help</em> tab in Rstudio is acutally helpful - cheatsheets</li>
 <li>Your office/labmate, who didn’t learn R in a vaccuum<br />
 </li>
-<li>Fellow Rgronomists</li>
+<li>Fellow Rgronomists<br />
+</li>
+<li>Anyone want to check out this online user group and let us know? <a href="http://rusers.co/">R users</a></li>
 </ul>
-</section><section id="keep-in-mind" class="slide level2">
-<h2>Keep in mind</h2>
+</section><section id="section" class="slide level2">
+<h2></h2>
 <p>You won’t get good help if you don’t put effort into the asking.</p>
 <center>
 <img src="images/helpmehelpyou.gif" width="500px" />
 </center>
+</section><section id="asking-good-questions" class="slide level2">
+<h2>Asking good questions</h2>
+<p>If you are getting help online, you absolutely must create a reproducible example.</p>
+<ul>
+<li>You will not get an answer until you do this.<br />
+</li>
+<li>This is not trivial.<br />
+</li>
+<li>Good exercise in thinking about your problem.<br />
+</li>
+<li>Half the time helpers won’t know if their code actually works unless they can run it.</li>
+</ul>
+<p><strong>Rep</strong>roducible <strong>ex</strong>ample is also called a <strong>reprex</strong></p>
+</section>
+<section id="steps-to-asking-a-good-question" class="titleslide slide level1"><h2 class="shout">Steps to asking a good question</h2></section><section id="step-1.-do-your-homework." class="slide level2">
+<h2>Step 1. Do your homework.</h2>
+<ul>
+<li>Read the basics related to what you are doing.
+<ul>
+<li><code>?()</code> in console<br />
+</li>
+<li>Online documentation, vignettes<br />
+</li>
+</ul></li>
+<li>Check if some one else has asked the same question.
+<ul>
+<li>Google<br />
+</li>
+<li>StackOverflow is usually well covered by google, but sometimes searching specifically in the site works better.<br />
+People are more willing to give you their time if they can see that you put time in yourself.</li>
+</ul></li>
+</ul>
+</section><section id="step-2.-provide-example-data." class="slide level2">
+<h2>Step 2. Provide example data.</h2>
+<ul>
+<li>Use a built-in dataset <code>library(help = &quot;datasets&quot;)</code><br />
+</li>
+<li>Generate a dummy dataframe</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+    <span class="dt">X =</span> <span class="kw">sample</span>(<span class="dv">1</span>:<span class="dv">10</span>),
+    <span class="dt">Y =</span> <span class="kw">sample</span>(<span class="kw">c</span>(<span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>), <span class="dv">10</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+)  </code></pre></div>
+<ul>
+<li>If the problem is with your dataset itself, provide some of the data by using <code>head()</code> for the first 6 rows and <code>dput()</code> to describe the structure.</li>
+</ul>
+</section><section id="step-3.-provide-minimal-code." class="slide level2">
+<h2>Step 3. Provide minimal code.</h2>
+<ul>
+<li>Show everyone what you tried and point out where you think the problem is<br />
+</li>
+<li>Use only as much code as you have to - have any conversions done before you post<br />
+</li>
+<li>Make sure they have everything to run the code
+<ul>
+<li>Include packages (<code>library())</code>)</li>
+<li>May want to include R and Rstudio versions (<code>rstudioapi::versionInfo()</code>)</li>
+<li>Make sure they can run your code<br />
+</li>
+<li><code>reprex</code> package</li>
+</ul></li>
+</ul>
+</section>
+<section id="you-probably-solved-your-problem-by-now" class="titleslide slide level1"><h2 class="shout">You probably solved your problem by now</h2></section><section id="step-4.-steel-yourself." class="slide level2">
+<h2>Step 4. Steel yourself.</h2>
+<ul>
+<li>People online can be insensitive and callous
+<ul>
+<li>They still mean well<br />
+</li>
+<li>Different backgrounds result in different tones</li>
+<li>Help is help<br />
+</li>
+</ul></li>
+<li>Admit if you did not follow Steps1-3 well
+<ul>
+<li>Turn the other cheek</li>
+<li>Get over yourself</li>
+<li>Edit your question</li>
+<li>Do better next time</li>
+</ul></li>
+</ul>
+</section><section id="more-details-on-asking-good-questions" class="slide level2">
+<h2>More details on asking good questions</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example/16532098">Stackoverflow FAQ</a><br />
+</li>
+<li><a href="https://cran.r-project.org/web/packages/reprex/README.html#what-is-a-reprex">What is a reprex?</a><br />
+</li>
+<li><a href="http://www.njtierney.com/post/2017/01/11/magic-reprex/">reprex package blog</a><br />
+</li>
+<li><a href="http://reprex.tidyverse.org/">reprex package details</a></li>
+</ul>
+</section><section id="keeping-up-with-r" class="slide level2">
+<h2>Keeping up with R</h2>
+<ul>
+<li>All you need to do is follow <a href="https://twitter.com/dataandme">Mara Averick</a> on Twitter<br />
+</li>
+<li>You may notice some other people to follow while you are on there</li>
+</ul>
 </section>
 
   <!--

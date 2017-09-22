@@ -75,8 +75,10 @@ library(swirl)
 * [RStudio Community](https://community.rstudio.com/)  
 * [#rstats on twitter](https://twitter.com/hashtag/rstats?src=hash)  
 * [Organized learning communities](https://medium.com/@kierisi/join-the-r-for-data-science-online-learning-community-842527222ab3)  
+* The *help* tab in Rstudio is acutally helpful - cheatsheets
 * Your office/labmate, who didn't learn R in a vaccuum  
 * Fellow Rgronomists  
+* Anyone want to check out this online user group and let us know? [R users](http://rusers.co/)
 
 ##  
 You won't get good help if you don't put effort into the asking.  
@@ -90,6 +92,64 @@ If you are getting help online, you absolutely must create a reproducible exampl
   * This is not trivial.  
   * Good exercise in thinking about your problem.  
   * Half the time helpers won't know if their code actually works unless they can run it.  
+  
+**Rep**roducible **ex**ample is also called a **reprex**  
+
+#Steps to asking a good question  
+
+##Step 1. Do your homework.  
+* Read the basics related to what you are doing.  
+    + `?()` in console  
+    + Online documentation, vignettes  
+* Check if some one else has asked the same question.  
+    + Google  
+    + StackOverflow is usually well covered by google, but sometimes searching specifically in the site works better.  
+People are more willing to give you their time if they can see that you put time in yourself.  
+
+##Step 2. Provide example data.  
+* Use a built-in dataset `library(help = "datasets")`  
+* Generate a dummy dataframe
+```{r, dataframe}  
+Data <- data.frame(
+    X = sample(1:10),
+    Y = sample(c("yes", "no"), 10, replace = TRUE)
+)  
+```  
+* If the problem is with your dataset itself, provide some of the data by using `head()` for the first 6 rows and `dput()` to describe the structure.  
+
+##Step 3. Provide minimal code.  
+* Show everyone what you tried and point out where you think the problem is  
+* Use only as much code as you have to - have any conversions done before you post  
+* Make sure they have everything to run the code  
+    + Include packages (`library())`)
+    + May want to include R and Rstudio versions (`rstudioapi::versionInfo()`)
+    + Make sure they can run your code  
+    + `reprex` package   
+    
+#You probably solved your problem by now  
+   
+##Step 4. Steel yourself.  
+* People online can be insensitive and callous  
+    + They still mean well  
+    + Different backgrounds result in different tones
+    + Help is help  
+* Admit if you did not follow Steps1-3 well  
+    + Turn the other cheek
+    + Get over yourself
+    + Edit your question 
+    + Do better next time  
+    
+##More details on asking good questions  
+* [Stackoverflow FAQ](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example/16532098)  
+* [What is a reprex?](https://cran.r-project.org/web/packages/reprex/README.html#what-is-a-reprex)  
+* [reprex package blog](http://www.njtierney.com/post/2017/01/11/magic-reprex/)    
+* [reprex package details](http://reprex.tidyverse.org/)    
+
+##Keeping up with R  
+* All you need to do is follow [Mara Averick](https://twitter.com/dataandme) on Twitter  
+* You may notice some other people to follow while you are on there
+    
+
 
 
 
